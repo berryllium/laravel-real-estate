@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Listing::class, 'listing');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +46,7 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        Listing::create($request->validate([
+        $request->user()->listings()->create($request->validate([
             'beds' => 'required|integer|max:20',
             'baths' => 'required|integer|max:20',
             'area' => 'required|integer|min:20',
