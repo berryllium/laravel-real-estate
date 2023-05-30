@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import {useForm} from "@inertiajs/vue3"
+import {useForm} from '@inertiajs/vue3'
 const props = defineProps({filters: Object})
 const filterForm = useForm({
   priceFrom: props.filters.priceFrom ?? null,
