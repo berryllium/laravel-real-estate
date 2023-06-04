@@ -4,7 +4,7 @@
     <RealtorFilters :filters="filters" />
   </section>
   <section class="grid grid-cols-1 gap-2 lg:grid-cols-2">
-    <Box v-for="listing in listings.data" :key="listing.id">
+    <Box v-for="listing in listings.data" :key="listing.id" :class="{'border-dashed': listing.deleted_at}">
       <div class="flex flex-col justify-between gap-2 md:flex-row md:items-center">
         <div>
           <div class="items-center gap-2 xl:flex">
@@ -14,15 +14,25 @@
           <ListingAddress :listing="listing" class="text-gray-500" />
         </div>
         <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-          <Link :href="route('realtor.listing.show', { listing:listing.id })" class="text-xs font-medium button-outline">Preview</Link>
+          <Link :href="route('listing.show', { listing:listing.id })" class="text-xs font-medium button-outline">Preview</Link>
           <Link :href="route('realtor.listing.edit', { listing:listing.id })" class="text-xs font-medium button-outline">Edit</Link>
           <Link 
+            v-if="!listing.deleted_at"
             :href="route('realtor.listing.destroy', { listing:listing.id })" 
             as="button" 
             method="delete" 
             class="text-xs font-medium button-outline"
           >
             Delete
+          </Link>
+          <Link 
+            v-else
+            :href="route('realtor.listing.restore', { listing:listing.id })" 
+            as="button" 
+            method="put" 
+            class="text-xs font-medium button-outline"
+          >
+            Restore
           </Link>
         </div>
       </div>
