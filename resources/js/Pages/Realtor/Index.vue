@@ -14,8 +14,8 @@
           <ListingAddress :listing="listing" class="text-gray-500" />
         </div>
         <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-          <Link :href="route('listing.index')" class="text-xs font-medium button-outline">Preview</Link>
-          <Link :href="route('listing.index')" class="text-xs font-medium button-outline">Edit</Link>
+          <Link :href="route('listing.show', { listing:listing.id })" class="text-xs font-medium button-outline">Preview</Link>
+          <Link :href="route('listing.edit', { listing:listing.id })" class="text-xs font-medium button-outline">Edit</Link>
           <Link 
             :href="route('realtor.listing.destroy', { listing:listing.id })" 
             as="button" 
