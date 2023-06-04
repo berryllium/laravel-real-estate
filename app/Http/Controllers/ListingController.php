@@ -39,37 +39,6 @@ class ListingController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return inertia('Listing/Create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->user()->listings()->create($request->validate([
-            'beds' => 'required|integer|max:20',
-            'baths' => 'required|integer|max:20',
-            'area' => 'required|integer|min:20',
-            'city' => 'required',
-            'code' => 'required',
-            'street' => 'required',
-            'street_nr' => 'required|integer|min:1',
-            'price' => 'required|integer',
-        ]));
-        return redirect()->route('listing.index')->with('success', 'Listing was added');
-    }
-
     public function show(Listing $listing)
     {
         return inertia(
@@ -78,38 +47,6 @@ class ListingController extends Controller
                 'listing' => $listing
             ]
         );
-    }
-
-    public function edit(Listing $listing)
-    {
-        return inertia(
-            'Listing/Edit',
-            [
-                'listing' => $listing
-            ]
-        );
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Listing $listing)
-    {
-        $listing->update($request->validate([
-            'beds' => 'required|integer|max:20',
-            'baths' => 'required|integer|max:20',
-            'area' => 'required|integer|min:20',
-            'city' => 'required',
-            'code' => 'required',
-            'street' => 'required',
-            'street_nr' => 'required|integer|min:1',
-            'price' => 'required|integer',
-        ]));
-        return redirect()->route('listing.index')->with('success', 'Listing was changed');
     }
 
 }

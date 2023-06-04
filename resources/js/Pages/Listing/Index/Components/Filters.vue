@@ -44,7 +44,7 @@ const filterForm = useForm({
 
 const filter = () => {
   filterForm.get(
-    route('listing.index'),
+    route('realtor.listing.index'),
     {
       preserveState: true,
       preserveScroll: true,
