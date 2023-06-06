@@ -41,6 +41,7 @@ class ListingController extends Controller
 
     public function show(Listing $listing)
     {
+        $listing->load(['images']);
         return inertia(
             'Listing/Show',
             [

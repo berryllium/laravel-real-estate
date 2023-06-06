@@ -21,6 +21,11 @@
           Reset
         </button>
       </section>
+      <section v-if="imageErrors.length">
+        <div v-for="(error, index) in imageErrors" :key="index" class="input-error">
+          {{ error }}
+        </div>
+      </section>
     </form>
   </Box>  
   <Box v-if="listing.images.length" class="mt-4">
@@ -53,6 +58,7 @@ const props = defineProps({
 const form = useForm({
   images: [],
 })
+const imageErrors = computed(() => Object.values(form.errors))
 const upload = () => {
   form.post(route('realtor.listing.image.store', {listing: props.listing.id}), {
     onSuccess: () => {
@@ -61,7 +67,7 @@ const upload = () => {
   })
 }
 const addFiles = (event) => {
-  for(const image in event.target.files) {
+  for(const image of event.target.files) {
     form.images.push(image)
   }
 }
