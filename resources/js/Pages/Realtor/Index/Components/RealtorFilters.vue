@@ -33,6 +33,7 @@
 import { reactive, watch, computed } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
+import { router } from '@inertiajs/core';
 
 const sortLabels = {
   created_at: [
@@ -69,7 +70,7 @@ const filterForm = reactive({
   order: props.filters.order ?? 'desc',
 })
 watch(
-  filterForm, debounce(() => Inertia.get(
+  filterForm, debounce(() => router.get(
     route('realtor.listing.index'),
     filterForm,
     { preserveState: true, preserveScroll: true },
