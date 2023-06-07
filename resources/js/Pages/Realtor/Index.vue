@@ -44,6 +44,14 @@
               Images ( {{ listing.images_count }} )
             </Link>
           </div>
+          <div class="mt-2">
+            <Link 
+              :href="route('realtor.listing.show', {listing:listing.id})" 
+              class="block w-full button-outline text-xs font-medium text-center"
+            >
+              Offers ( {{ listing.offers_count }} )
+            </Link>
+          </div>
         </section>
       </div>
     </Box>

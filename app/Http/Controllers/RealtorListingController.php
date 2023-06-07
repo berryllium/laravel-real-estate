@@ -26,6 +26,7 @@ class RealtorListingController extends Controller
                         ->listings()
                         ->filter($filters)
                         ->withCount('images')
+                        ->withCount('offers')
                         ->paginate(5)
                         ->withQueryString()
                 ]
@@ -105,6 +106,10 @@ class RealtorListingController extends Controller
     public function restore(Listing $listing) {
         $listing->restore();
         return redirect()->route('realtor.listing.index')->with('success', 'Listing was restored');
+    }
+
+    public function show(Listing $listing) {
+        return inertia('Realtor/Show', ['listing' => $listing->load('offers')]);
     }
 
 }
