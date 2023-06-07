@@ -60,7 +60,7 @@ class Listing extends Model
             )
             ->when(
                 $filters['areaFrom'] ?? false,
-                fn ($query, $value) => $query->where('area', '<=', $value)
+                fn ($query, $value) => $query->where('area', '>=', $value)
             )
             ->when(
                 $filters['areaTo'] ?? false,
