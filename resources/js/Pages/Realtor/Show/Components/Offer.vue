@@ -1,17 +1,17 @@
 <template>
   <Box>
-    <template #header>Offer #{{ offer.id }}</template>
+    <template #header>Offer #{{ offer.id }} <span v-if="offer.accepted_at" class="p-1 rounded-md uppercase ml-1 dark:bg-green-900 bg-green-200 text-green-900 dark:text-green-200">accepted</span></template>
 
     <section class="flex items-center justify-between">
       <div>
         <Price :price="offer.amount" class="text-xl" />
 
         <div class="text-gray-500">
-          Difference <Price :price="difference" />
+         Difference <Price :price="difference" />
         </div>
 
         <div class="text-gray-500 text-sm">
-          Made by John Doe
+          Made by {{ offer.bidder.name }}
         </div>
 
         <div class="text-gray-500 text-sm">
@@ -20,6 +20,9 @@
       </div>
       <div>
         <Link
+          v-if="!isSold"
+          :href="route('realtor.offer.accept', {offer: offer.id})"
+          method="put"
           class="button-outline text-xs font-medium" 
           as="button"
         >

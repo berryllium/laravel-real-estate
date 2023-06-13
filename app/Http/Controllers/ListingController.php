@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
 {
@@ -35,7 +35,11 @@ class ListingController extends Controller
             'Listing/Index',
             [
                 'filters' => $filters,
-                'listings' => Listing::latest()->filter($filters)->paginate(10)->withQueryString()
+                'listings' => Listing::latest()
+                    ->filter($filters)
+                    ->withoutSold()
+                    ->paginate(10)
+                    ->withQueryString()
             ]
         );
     }

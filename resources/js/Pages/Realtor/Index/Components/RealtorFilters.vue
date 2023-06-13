@@ -31,9 +31,8 @@
 
 <script setup>
 import { reactive, watch, computed } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
 import { debounce } from 'lodash'
-import { router } from '@inertiajs/core';
+import { router } from '@inertiajs/core'
 
 const sortLabels = {
   created_at: [

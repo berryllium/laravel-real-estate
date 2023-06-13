@@ -14,7 +14,7 @@ class Offer extends Model
 
     protected $fillable = ['amount', 'accepted_at', 'rejected_at'];
 
-    public function listings(): BelongsTo {
+    public function listing(): BelongsTo {
         return $this->belongsTo(Listing::class, 'listing_id');
     }
 
@@ -22,7 +22,11 @@ class Offer extends Model
         return $this->belongsTo(User::class, 'bidder_id');
     }
 
-    public function scopeByMe(Builder $builder) {
-        $builder->where('bidder_id', Auth::user()?->id);
+    public function scopeByMe(Builder $query) {
+        return $query->where('bidder_id', Auth::user()?->id);
+    }
+
+    public function scopeExcept(Builder $query, Offer $offer) {
+        return $query->where('id', '!=', $offer->id);
     }
 }

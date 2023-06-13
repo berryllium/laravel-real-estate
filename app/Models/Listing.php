@@ -77,4 +77,8 @@ class Listing extends Model
                 $query->orderBy($value, $filters['order'] ?? 'desc')
             );
     }
+
+    public function scopeWithoutSold(Builder $query) {
+        return $query->whereNull('sold_at');
+    }
 }
