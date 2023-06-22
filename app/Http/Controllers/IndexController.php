@@ -9,12 +9,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return inertia(
-            'Index/Index',
-            [
-                'message' => 'Hello from Laravel'
-            ]
-        );
+        return redirect(route('listing.index'));
     }
 
     public function show()
